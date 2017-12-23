@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid silver;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: center;
+}
+h2 {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+{% if last_buy %}
+    <h2>ÚLTIMA COMPRA</h2>
+    <table style="width:100%">
+        <tr>
+            <td>
+                <table style="width:100%">
+                    <tr>
+                        <td>{{last_buy.purchase_date|date:"o"}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{last_buy.purchase_date|date:"F"}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td>{{last_buy.purchase_date|date:"l d"}}</td>
+            <td>Hace {{last_buy.days_ago}} días</td>
+        </tr>
+        <tr>
+            <td>{{last_buy.gas_amount}} litros</td>
+            <td>${{last_buy.paid_amount|floatformat:2}}</td>
+            <td>${{last_buy.gas_price|floatformat:3}}</td>
+        </tr>
+        <tr>
+            <td colspan = "3">Tacómetro {{last_buy.tachometer|floatformat}} km</td>
+        </tr>
+        <tr>
+            <td colspan = "3">Consumo {{last_buy.gas_consumption|floatformat:3}} l/100km</td>
+        </tr>
+    </table>
+{% else %}
+    <p>No hay compras registradas.</p>
+{% endif %}
+</body>
+</html>

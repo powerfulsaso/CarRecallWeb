@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    table, th, td {
+    border: 1px solid silver;
+    border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+        text-align: center;
+        }
+    h2 {
+    	text-align: center;
+    	}
+</style>
+    <meta charset="UTF-8">
+    <title>Historial de Compra</title>
+</head>
+<body>
+<h2>Historial de Compras</h2>
+{% if all_buys %}
+    {% for buy in all_buys %}
+        <table style="width:100%">
+            <tr>
+            <td>
+                <table style="width:100%">
+                    <tr>
+                        <td>{{buy.purchase_date|date:"o"}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{buy.purchase_date|date:"F"}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td>{{buy.purchase_date|date:"l d"}}</td>
+            <td>Hace {{buy.days_ago}} días</td>
+            </tr>
+            <tr>
+                <td>{{buy.gas_amount}} litros</td>
+                <td>${{buy.paid_amount|floatformat:2}}</td>
+                <td>${{buy.gas_price|floatformat:3}}</td>
+            </tr>
+            <tr>
+                <td colspan = "3">Tacómetro {{buy.tachometer|floatformat}} km</td>
+            </tr>
+            <tr>
+                <td colspan = "3">Consumo {{buy.gas_consumption|floatformat:3}} l/100km</td>
+            </tr>
+        </table>
+        </br>
+    {% endfor %}
+{% else %}
+    <p>No hay compras registradas.</p>
+{% endif %}
+</body>
+</html>
